@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>callhome</title>
+    <style type="text/css">
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        div{
+            text-align: center;
+            float: left;
+            height: 90%;
+        }
+        div.fs{
+            margin-left: 5%;
+            width: 45%;
+        }
+        div.sc{
+            margin-left: 1%;
+            width: 45%;
+        }
+        td{
+            border:  1px solid black;
+            text-align: left;
+            padding-left: 3%;
+            padding-right: 3%;
+
+        }
+        table{
+            margin-left: auto; 
+            margin-right: auto;
+            width: 100%;
+        }
+        td.qwe{
+            font-size: large;
+            font-weight: bolder;
+            text-align: center;
+        }
+        div.acac{
+            display: block;
+            text-align: center;
+            float: right;
+            margin-bottom: 2%;
+        }
+        div.acacac{
+            display: block;
+            text-align: center;
+            float: unset;
+            height: 2%;
+            margin-top: 2%;
+            margin-bottom: 4%;
+        }
+    </style>
+</head>
+
+<body>
+    <form align="center" action="./{{ callmd.mdname }}" method="get" style="margin-bottom: 1%;">
+        {% csrf_token %}
+        물건 검색 :
+        <input type="text" name="message">
+        <input type="submit" value="검색">
+    </form>
+    <input type="button" value="새 제품등록" onclick="location.href='/newmd'" style="float: right; margin-right: 5%;">
+    <div class="acacac">
+        {% for list in mdmd %}
+           <a href="">{{ list.mdname }}</a>
+        {% endfor %}
+    </div>
+    <div class="fs">
+        <table>
+            <tr>
+                <td class="qwe">{{ callinfo.mdname }}</td>
+            </tr>
+            <tr>
+                <td>{{ callinfo.mdinfo | linebreaksbr }}<br><br><br>
+                    <div class="acac">
+                        <input type="button" onclick="location.href='/info/'" value="내용 수정" style="width: 5rem; height: 2rem; font-weight: bolder;">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="sc">
+        <form action="." method="POST">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td class="qwe">제품명 : <input type="text" name="mdmd"></td>
+                </tr>
+                <tr>
+                    <td>내용 : <textarea name="ifif" style="width: 100%; height: 300px;"></textarea><br><br><br>
+                        <div class="acac">
+                            <input type="submit"  value="저장" style="width: 5rem; height: 2rem; font-weight: bolder;">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
